@@ -1,1 +1,1 @@
-//초기세팅 test
+const Discord = require("discord.js");
