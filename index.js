@@ -3,33 +3,37 @@ const { Client, GatewayIntentBits } = require("discord.js");
 
 // Intents를 GatewayIntentBits를 사용하여 지정
 const client = new Client({
-  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+  ],
 });
 
 const token = process.env["DISCORD_BOT_SECRET"];
+const channelName = '일반'; // 원하는 채널 이름
+const now = new Date();
+
+
 
 client.on("ready", () => {
+  client.guilds.cache.forEach(guild => {
+    console.log(guild.channels.cache);
+      let channel = guild.channels.cache.find(c => c.name === channelName && c.type === 0);
+      if (channel) {
+          channel.send(now.toLocaleString("ko-KR", {timeZone: 'Asia/Seoul'}) + '에도 이쁜 아르미 안녕~❤️');
+      }
+  });
+  
   console.log("I'm in");
   console.log(client.user.username);
+
 });
 
 client.on("messageCreate", (msg) => {
+  if(msg.author.bot) return;
   if (msg.author.id != client.user.id) {
-    console.log(msg);
-    //msg.channel.send(msg.content.split("").reverse().join(""));
+    msg.channel.send(msg.content.split("").reverse().join(""));
   }
 });
-
-// client.on("messageCreate", (msg) => {
-//   // 봇이 자신의 메시지에 반응하지 않도록 함
-//   if (msg.author.bot) return;
-
-//   // 사용자가 보낸 메시지 내용을 콘솔에 출력
-//   console.log(msg.content);
-
-//   // 사용자가 특정 메시지를 보냈을 때 반응하도록 설정
-//   if (msg.content === "안녕") {
-//     msg.channel.send("안녕하세요!");
-//   }
-// });
 client.login(token);
