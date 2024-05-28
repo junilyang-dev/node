@@ -2,15 +2,23 @@
   "name": "nodejs",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "license": "MIT",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.14.5",
+    "@babel/core": "^7.14.6",
+    "@babel/node": "^7.14.7",
+    "@babel/preset-env": "^7.14.7",
+    "nodemon": "^2.0.22"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
   "dependencies": {
-    "@types/node": "^18.0.6",
-    "discord.js": "^14.14.1"
+    "discord.js": "^14.14.1",
+    "express": "^4.17.1",
+    "pug": "^3.0.2",
+    "ws": "^7.5.3"
   }
 }
